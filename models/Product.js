@@ -15,8 +15,9 @@ const ProductSchema = new Schema({
     required: true,
   },
   garnish: {
-    type: String,
+    type: Array,
     required: true,
+    default: ["papas", "ensalada"],
   },
   of: {
     type: Array,
