@@ -40,7 +40,7 @@ checkoutController.sendWhatsappMessage = (req, res) => {
       }
     })
     .join("%0A")}`;
-  const url = `https://api.whatsapp.com/send?phone=5492241548450&text=${message}`;
+  const url = `send?phone=5492241548450&text=${message}`;
   res.status(200).json({ url });
 };
 
