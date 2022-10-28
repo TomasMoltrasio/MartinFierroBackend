@@ -2,6 +2,24 @@ const usersController = {};
 
 const User = require("../models/User.js");
 
+usersController.login = async (req, res) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
+  if (user) {
+    const matchPassword = await user.matchPassword(password);
+    if (matchPassword) {
+      return res.json({
+        _id: user._id,
+        username: user.username,
+        token: user.generateToken(user._id),
+      });
+    }
+  }
+  res.status(401).json({
+    message: "Invalid username or password",
+  });
+};
+
 usersController.getUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -15,7 +33,7 @@ usersController.getUsers = async (req, res) => {
 
 usersController.createUser = async (req, res) => {
   const user = new User({
-    name: req.body.name,
+    username: req.body.username,
     email: req.body.email,
     password: req.body.password,
   });

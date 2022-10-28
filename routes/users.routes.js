@@ -5,12 +5,23 @@ const {
   getUser,
   updateUser,
   deleteUser,
+  login,
 } = require("../controllers/users.controller");
+
+const { auth, handleError } = require("../auth");
 
 const router = Router();
 
-router.route("/").get(getUsers).post(createUser);
+router.route("/").get(auth, getUsers).post(auth, createUser);
 
-router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
+router.route("/login").post(login);
+
+router
+  .route("/:id")
+  .get(auth, getUser)
+  .put(auth, updateUser)
+  .delete(auth, deleteUser);
+
+router.use(handleError);
 
 module.exports = router;

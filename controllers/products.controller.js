@@ -56,6 +56,51 @@ productsController.getProductsByCategory = async (req, res) => {
   }
 };
 
+productsController.getActiveDay = async (req, res) => {
+  try {
+    const products = await Product.findOne({ activeDay: true });
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
+productsController.changeActiveDay = async (req, res) => {
+  try {
+    Product.updateMany(
+      { activeDay: true },
+      { $set: { activeDay: false } },
+      function (err, result) {
+        if (err) {
+          res.status(500).json({
+            message: err.message,
+          });
+        } else {
+          Product.updateOne(
+            { _id: req.params.id },
+            { $set: { activeDay: true } },
+            function (err, result) {
+              if (err) {
+                res.status(500).json({
+                  message: err.message,
+                });
+              } else {
+                res.json(result);
+              }
+            }
+          );
+        }
+      }
+    );
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
 productsController.updateProduct = async (req, res) => {
   try {
     const product = await Product.findByIdAndUpdate(req.params.id, req.body, {

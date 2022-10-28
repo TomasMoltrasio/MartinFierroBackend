@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const User = require("./User");
 
 const ProductSchema = new Schema({
   name: {
@@ -17,11 +18,12 @@ const ProductSchema = new Schema({
   garnish: {
     type: Array,
     required: true,
-    default: ["papas", "ensalada"],
+    default: null,
   },
   of: {
     type: Array,
     required: false,
+    default: null,
   },
   category: {
     type: String,
@@ -30,6 +32,11 @@ const ProductSchema = new Schema({
   image: {
     type: String,
     required: false,
+  },
+  activeDay: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 });
 
