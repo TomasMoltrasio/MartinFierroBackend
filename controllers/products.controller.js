@@ -20,8 +20,8 @@ productsController.createProduct = async (req, res) => {
     price: req.body.price,
     category: req.body.category,
     image: req.body.image || "",
-    of: req.body.of || "",
-    garnish: req.body.garnish || "",
+    of: req.body.of || null,
+    garnish: req.body.garnish || null,
   });
 
   try {

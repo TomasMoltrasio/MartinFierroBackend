@@ -1,11 +1,4 @@
-const getOrderTime = require("../controllers/orders.time.controller");
-
 const checkoutController = {};
-
-checkoutController.getOrderTime = async (req, res) => {
-  const orderTime = await getOrderTime();
-  res.status(200).json(orderTime);
-};
 
 const getQuantity = (garnish) => {
   let quantity = 0;
