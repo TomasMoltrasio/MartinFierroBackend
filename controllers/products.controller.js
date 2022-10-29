@@ -69,31 +69,18 @@ productsController.getActiveDay = async (req, res) => {
 
 productsController.changeActiveDay = async (req, res) => {
   try {
-    Product.updateMany(
-      { activeDay: true },
-      { $set: { activeDay: false } },
-      function (err, result) {
-        if (err) {
-          res.status(500).json({
-            message: err.message,
-          });
-        } else {
-          Product.updateOne(
-            { _id: req.params.id },
-            { $set: { activeDay: true } },
-            function (err, result) {
-              if (err) {
-                res.status(500).json({
-                  message: err.message,
-                });
-              } else {
-                res.json(result);
-              }
-            }
-          );
-        }
-      }
+    await Product.updateMany(
+      { category: "Dia" },
+      { $set: { activeDay: false } }
     );
+    await Product.updateOne(
+      { _id: req.params.id },
+      { $set: { activeDay: true } },
+      { new: true }
+    );
+    res.json({
+      message: "Changed active day",
+    });
   } catch (err) {
     res.status(500).json({
       message: err.message,

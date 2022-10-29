@@ -14,9 +14,9 @@ checkoutController.sendWhatsappMessage = (req, res) => {
   const message = `*Nueva Orden*%0A%0A*Nombre:* ${name}%0A*Direccion:* ${address}%0A*Horario:* ${selectedOrderTime}%0A*Total:* ${total}%0A*Nota:* ${note}%0A%0A*Productos:*%0A${cart
     .map((item) => {
       if (item.category === "Empanadas") {
-        return `${getQuantity(item.garnish)}x ${item.name} (${Object.keys(
-          item.garnish
-        )
+        return `${getQuantity(item.garnish)}x ${item.name} ${
+          item.of
+        } (${Object.keys(item.garnish)
           .map((key) => {
             if (item.garnish[key] > 0) {
               return `${key} x${item.garnish[key]}`;
