@@ -5,7 +5,6 @@ const ProductSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
   },
   price: {
     type: Number,
@@ -17,7 +16,7 @@ const ProductSchema = new Schema({
   },
   garnish: {
     type: Array,
-    required: true,
+    required: false,
     default: null,
   },
   of: {

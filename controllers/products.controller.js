@@ -73,7 +73,7 @@ productsController.changeActiveDay = async (req, res) => {
       { category: "Dia" },
       { $set: { activeDay: false } }
     );
-    await Product.updateOne(
+    const prod = await Product.updateOne(
       { _id: req.params.id },
       { $set: { activeDay: true } },
       { new: true }
