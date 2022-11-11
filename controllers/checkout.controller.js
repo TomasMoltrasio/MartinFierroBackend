@@ -33,7 +33,8 @@ checkoutController.sendWhatsappMessage = (req, res) => {
       }
     })
     .join("%0A")}`;
-  const url = `send?phone=5492241527444&text=${message}`;
+  // const url = `send?phone=5492241527444&text=${message}`;
+  const url = `5492241527444?text=${message}`;
   res.status(200).json({ url });
 };
 
